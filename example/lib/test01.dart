@@ -50,6 +50,7 @@ class HighlightMask extends StatelessWidget {
         targetKey.currentContext!.findRenderObject() as RenderBox;
     final position = renderBox.localToGlobal(Offset.zero);
     return Positioned.fill(
+      // child: Text("abcdefg"),
       child: CustomPaint(
         painter: HolePainter(
           rect: Rect.fromPoints(
@@ -74,11 +75,21 @@ class HolePainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     final outerPath = Path()
       ..addRect(Rect.fromLTWH(0, 0, size.width, size.height));
-    final innerPath = Path()..addRect(rect);
+    final innerPath = Path()
+      ..addRRect(RRect.fromLTRBAndCorners(
+        rect.left,
+        rect.top,
+        rect.right,
+        rect.bottom,
+        topLeft: const Radius.circular(4),
+        topRight: const Radius.circular(4),
+        bottomLeft: const Radius.circular(4),
+        bottomRight: const Radius.circular(4),
+      ));
 
     final path = Path.combine(PathOperation.difference, outerPath, innerPath);
 
-    final paint = Paint()..color = Colors.black.withOpacity(0.7);
+    final paint = Paint()..color = Colors.black.withOpacity(0.4);
 
     canvas.drawPath(path, paint);
   }
