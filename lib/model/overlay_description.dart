@@ -5,10 +5,25 @@ class OverlayDescription {
 
   Rect drawRect;
 
-  OverlayDescription(this.overlayDesc, this.drawRect);
+  DescriptionPosition position;
+
+  OverlayDescription(
+    this.overlayDesc,
+    this.drawRect, {
+    this.position = DescriptionPosition.auto,
+  });
 
   @override
   String toString() {
     return "overlayDesc = $overlayDesc, drawRect = ${drawRect.toString()}";
   }
+}
+
+enum DescriptionPosition {
+  screenCenter,
+  widgetTopCenter,
+  widgetTopFit,
+  widgetBottomCenter,
+  widgetBottomFit,
+  auto,
 }

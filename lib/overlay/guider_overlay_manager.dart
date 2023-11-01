@@ -8,6 +8,8 @@ class GuiderOverlayManager {
   static GuiderOverlayManager? _inst;
   final BuildContext context;
 
+  OverlayEntry? _guideMaskingOverlay;
+
   GuiderOverlayManager._(this.context);
 
   final List<OverlayDescription> _overlayDescArray = [];
@@ -55,18 +57,28 @@ class GuiderOverlayManager {
   }
 
   _showActual() {
-    OverlayEntry entry = OverlayEntry(builder: (ctx) {
-      return GuiderOverlayContainer(_overlayDescArray);
+    _guideMaskingOverlay ??= OverlayEntry(builder: (ctx) {
+      return GuiderOverlayContainer(_overlayDescArray, _dismiss);
     });
-    Overlay.of(context).insert(entry);
+    Overlay.of(context).insert(_guideMaskingOverlay!);
+  }
+
+  _dismiss() {
+    print("dismiss invoke!!");
+    _guideMaskingOverlay?.remove();
+    _guideMaskingOverlay = null;
   }
 }
 
 class GuiderOverlayContainer extends StatefulWidget {
   final List<OverlayDescription> overlayDescArray;
+  final VoidCallback dismissCallback;
 
-  const GuiderOverlayContainer(this.overlayDescArray, {Key? key})
-      : super(key: key);
+  const GuiderOverlayContainer(
+    this.overlayDescArray,
+    this.dismissCallback, {
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<GuiderOverlayContainer> createState() => _GuiderOverlayContainerState();
@@ -87,54 +99,58 @@ class _GuiderOverlayContainerState extends State<GuiderOverlayContainer>
     overlayDescArray = widget.overlayDescArray;
     animController = AnimationController(vsync: this);
     animController?.addStatusListener((status) {
-      print("animController listener invoke!!");
       if (status == AnimationStatus.completed) {
-        print("animController completed!!");
         setState(() {
           stepIndex++;
-          prepareStartAndNext();
+          animController?.value = 0;
+          _prepareStartAndNext();
         });
       }
     });
 
-    prepareStartAndNext();
+    _prepareStartAndNext();
   }
 
-  prepareStartAndNext() {
-    print(
-        "stepIndex = $stepIndex, overlayDescArr index = ${overlayDescArray!.length}");
+  _prepareStartAndNext() {
+    start = next;
+    next = null;
     if (stepIndex < overlayDescArray!.length) {
-      print("overlayDescArray1 = $overlayDescArray");
-      start = overlayDescArray?[stepIndex];
+      start = overlayDescArray![stepIndex];
       if (stepIndex < overlayDescArray!.length - 1) {
-        print("overlayDescArray2 = $overlayDescArray");
-        next = overlayDescArray?[stepIndex + 1];
+        next = overlayDescArray![stepIndex + 1];
       }
     }
-    print("start === $start");
-    print("next === $next");
+
+    print("prepare done\n start=$start\n next=$next");
   }
 
-  showRectAnimation() {
-    animController?.animateTo(1, duration: Duration(milliseconds: 200));
+  _guideContinue() {
+    if (next == null) {
+      widget.dismissCallback.call();
+    } else {
+      animController?.animateTo(1, duration: const Duration(milliseconds: 180));
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    // return Container();
     return start == null && next == null
         ? Container()
         : GestureDetector(
             onTap: () {
-              showRectAnimation();
+              _guideContinue();
             },
             child: CustomPaint(
               size: Size(
                 MediaQuery.of(context).size.width,
                 MediaQuery.of(context).size.height,
               ),
-              painter: GuiderPainter(start!, animController!, next: next),
-              // painter: GuiderPainter(next!, animController!, next: next),
+              painter: GuiderPainter(
+                start!,
+                start!.overlayDesc,
+                animController!,
+                next: next,
+              ),
             ),
           );
   }

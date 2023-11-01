@@ -21,6 +21,7 @@ class _Test02State extends State<Test02> with WidgetsBindingObserver {
   GuiderOverlayManager? manager;
   GlobalKey k1 = GlobalKey();
   GlobalKey k2 = GlobalKey();
+  GlobalKey k3 = GlobalKey();
 
   @override
   void initState() {
@@ -43,6 +44,7 @@ class _Test02State extends State<Test02> with WidgetsBindingObserver {
     manager?.prepareGuider(GuiderOptions(), [
       GuiderWidgetItemModel(widgetKey: k1, guideDesc: "k1k1"),
       GuiderWidgetItemModel(widgetKey: k2, guideDesc: "k2k2"),
+      GuiderWidgetItemModel(widgetKey: k3, guideDesc: "k3k3"),
     ]);
     manager?.show();
   }
@@ -55,6 +57,7 @@ class _Test02State extends State<Test02> with WidgetsBindingObserver {
   }
 
   _buildBody(BuildContext context) {
+    // return Column(children: [],mainAxisAlignment: MainAxisAlignment.start,)
     return Stack(
       children: [
         Align(
@@ -78,6 +81,19 @@ class _Test02State extends State<Test02> with WidgetsBindingObserver {
               child: Text(
                 key: k2,
                 "我是第二个文本",
+              ),
+            ),
+          ),
+        ),
+        Align(
+          alignment: Alignment.topCenter,
+          child: GestureDetector(
+            onTap: () {},
+            child: Container(
+              margin: EdgeInsets.only(top: 200),
+              child: Text(
+                key: k3,
+                "我是第三个文本",
               ),
             ),
           ),
