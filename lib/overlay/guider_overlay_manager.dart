@@ -45,8 +45,12 @@ class GuiderOverlayManager {
           b = t + widgetHeight;
           r = l + widgetWidth;
         }
-        _overlayDescArray
-            .add(OverlayDescription(item.guideDesc, Rect.fromLTRB(l, t, r, b)));
+        _overlayDescArray.add(OverlayDescription(
+          item.guideDesc,
+          Rect.fromLTRB(l, t, r, b),
+          position: item.position,
+          overlayStyle: item.overlayStyle,
+        ));
       }
     }
   }
@@ -147,7 +151,6 @@ class _GuiderOverlayContainerState extends State<GuiderOverlayContainer>
               ),
               painter: GuiderPainter(
                 start!,
-                start!.overlayDesc,
                 animController!,
                 next: next,
               ),
