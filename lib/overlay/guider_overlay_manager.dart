@@ -50,6 +50,7 @@ class GuiderOverlayManager {
           Rect.fromLTRB(l, t, r, b),
           position: item.position,
           overlayStyle: item.overlayStyle,
+          padding: item.padding,
         ));
       }
     }

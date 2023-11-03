@@ -10,11 +10,14 @@ class OverlayDescription {
 
   TextStyle overlayStyle;
 
+  EdgeInsets padding;
+
   OverlayDescription(
     this.overlayDesc,
     this.drawRect, {
     this.position = DescriptionPosition.auto,
     this.overlayStyle = const TextStyle(),
+    this.padding = const EdgeInsets.all(4),
   });
 
   @override

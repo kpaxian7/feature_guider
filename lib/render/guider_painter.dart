@@ -32,22 +32,22 @@ class GuiderPainter extends CustomPainter {
     double right = 0;
     double bottom = 0;
 
-    left = show.drawRect.left;
+    left = show.drawRect.left - show.padding.left;
     if (next != null) {
       left = left + (next!.drawRect.left - left) * controller.value;
     }
 
-    top = show.drawRect.top;
+    top = show.drawRect.top - show.padding.top;
     if (next != null) {
       top = top + (next!.drawRect.top - top) * controller.value;
     }
 
-    right = show.drawRect.right;
+    right = show.drawRect.right + show.padding.right;
     if (next != null) {
       right = right + (next!.drawRect.right - right) * controller.value;
     }
 
-    bottom = show.drawRect.bottom;
+    bottom = show.drawRect.bottom + show.padding.bottom;
     if (next != null) {
       bottom = bottom + (next!.drawRect.bottom - bottom) * controller.value;
     }
@@ -108,10 +108,23 @@ class GuiderPainter extends CustomPainter {
     double offsetX = 0;
     double offsetY = 0;
 
+    bool endOverflow = show.drawRect.left + descWidth > size.width;
+
     double interval = 0;
 
     switch (show.position) {
       case DescriptionPosition.auto:
+        if (widgetCenterY > size.height / 2) {
+          offsetX = endOverflow
+              ? show.drawRect.right - descWidth
+              : show.drawRect.left;
+          offsetY = show.drawRect.top - descHeight - interval;
+        } else {
+          offsetX = endOverflow
+              ? show.drawRect.right - descWidth
+              : show.drawRect.left;
+          offsetY = show.drawRect.bottom + interval;
+        }
         break;
       case DescriptionPosition.screenCenter:
         offsetX = (size.width - descWidth) / 2;
@@ -122,12 +135,18 @@ class GuiderPainter extends CustomPainter {
         offsetY = show.drawRect.top - descHeight - interval;
         break;
       case DescriptionPosition.widgetTopFit:
+        offsetX =
+            endOverflow ? show.drawRect.right - descWidth : show.drawRect.left;
+        offsetY = show.drawRect.top - descHeight - interval;
         break;
       case DescriptionPosition.widgetBottomCenter:
         offsetX = widgetCenterX - descWidth / 2;
         offsetY = show.drawRect.bottom + interval;
         break;
       case DescriptionPosition.widgetBottomFit:
+        offsetX =
+            endOverflow ? show.drawRect.right - descWidth : show.drawRect.left;
+        offsetY = show.drawRect.bottom + interval;
         break;
     }
 

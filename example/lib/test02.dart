@@ -43,17 +43,21 @@ class _Test02State extends State<Test02> with WidgetsBindingObserver {
     manager = GuiderOverlayManager.instance(context);
     manager?.prepareGuider(GuiderOptions(), [
       GuiderWidgetItemModel(
-          widgetKey: k1,
-          guideDesc: "k1k1",
-          position: DescriptionPosition.widgetTopCenter),
+        widgetKey: k1,
+        guideDesc: "k1k1",
+        position: DescriptionPosition.widgetTopCenter,
+        padding: EdgeInsets.zero,
+      ),
       GuiderWidgetItemModel(
-          widgetKey: k2,
-          guideDesc: "k2k2",
-          position: DescriptionPosition.widgetTopCenter),
+        widgetKey: k2,
+        guideDesc: "k2k2k2k2k2kk2k2k2k2k2k2k",
+        position: DescriptionPosition.widgetTopFit,
+      ),
       GuiderWidgetItemModel(
-          widgetKey: k3,
-          guideDesc: "k3k3",
-          position: DescriptionPosition.widgetBottomCenter),
+        widgetKey: k3,
+        guideDesc: "k3k3",
+        position: DescriptionPosition.widgetBottomFit,
+      ),
     ]);
     manager?.show();
   }
@@ -86,7 +90,7 @@ class _Test02State extends State<Test02> with WidgetsBindingObserver {
           child: GestureDetector(
             onTap: () {},
             child: Container(
-              margin: EdgeInsets.only(bottom: 200),
+              margin: EdgeInsets.only(bottom: 200, left: 200),
               child: Text(
                 key: k2,
                 "我是第二个文本",
