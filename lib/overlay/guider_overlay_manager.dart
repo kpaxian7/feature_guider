@@ -19,6 +19,8 @@ class GuiderOverlayManager {
     return _inst!;
   }
 
+  // GuiderOverlayManager();
+
   prepareGuider(
       GuiderOptions options, List<GuiderWidgetItemModel> guiderWidgetList) {
     _overlayDescArray.clear();
