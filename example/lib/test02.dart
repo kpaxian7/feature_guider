@@ -1,8 +1,6 @@
-import 'package:feature_guider/model/guider_options.dart';
-import 'package:feature_guider/model/guider_widget_item.dart';
-import 'package:feature_guider/overlay/guider_overlay_manager.dart';
 import 'package:flutter/material.dart';
-import 'package:feature_guider/render/guider_painter.dart';
+import 'package:feature_guider/guide_item.dart';
+import 'package:feature_guider/guide_manager.dart';
 
 main() {
   runApp(MaterialApp(
@@ -18,7 +16,7 @@ class Test02 extends StatefulWidget {
 }
 
 class _Test02State extends State<Test02> with WidgetsBindingObserver {
-  GuiderOverlayManager? manager;
+  GuideManager? manager;
   GlobalKey k1 = GlobalKey();
   GlobalKey k2 = GlobalKey();
   GlobalKey k3 = GlobalKey();
@@ -26,36 +24,41 @@ class _Test02State extends State<Test02> with WidgetsBindingObserver {
   @override
   void initState() {
     super.initState();
-    // manager = GuiderOverlayManager.instance(context);
-    // manager?.prepareGuider(GuiderOptions(), [
-    //   GuiderWidgetItemModel(widgetKey: k1, guideDesc: "k1k1"),
-    //   GuiderWidgetItemModel(widgetKey: k2, guideDesc: "k2k2"),
-    // ]);
+    manager = GuideManager(context);
 
     WidgetsBinding.instance.addObserver(this);
     WidgetsBinding.instance.addPostFrameCallback((_) {
       print("单次Frame绘制回调"); //只回调一次
-      // manager?.show();
+      manager?.prepare([
+        GuideItem(toGuideKey: k1, description: "k1k1"),
+        GuideItem(toGuideKey: k2, description: "k2k2"),
+      ]);
+      manager?.show();
     });
   }
 
   showOverlay() {
-    manager = GuiderOverlayManager.instance(context);
-    manager?.prepareGuider(GuiderOptions(), [
-      GuiderWidgetItemModel(
-        widgetKey: k1,
-        guideDesc: "k1k1",
+    manager = GuideManager(context);
+    manager?.prepare([
+      GuideItem(
+        toGuideKey: k1,
+        description: "k1k1",
         position: DescriptionPosition.widgetTopCenter,
         padding: EdgeInsets.zero,
       ),
-      GuiderWidgetItemModel(
-        widgetKey: k2,
-        guideDesc: "k2k2k2k2k2kk2k2k2k2k2k2k",
-        position: DescriptionPosition.widgetTopFit,
+      GuideItem(
+          toGuideKey: k2,
+          description: "k2k2k2k2k2kk2k2k2k2k2k2k",
+          position: DescriptionPosition.widgetTopFit,
+          padding: const EdgeInsets.only(top: 4)),
+      GuideItem(
+        toGuideKey: k3,
+        description: "k3k3",
+        position: DescriptionPosition.widgetBottomFit,
       ),
-      GuiderWidgetItemModel(
-        widgetKey: k3,
-        guideDesc: "k3k3",
+      GuideItem(
+        toGuideRect: Rect.fromPoints(Offset(100, 100), Offset(200, 300)),
+        description: "k4k4",
         position: DescriptionPosition.widgetBottomFit,
       ),
     ]);

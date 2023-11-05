@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:feature_guider/overlay/guider_overlay_manager.dart';
 
 main() {
   runApp(const MaterialApp(
@@ -30,7 +29,7 @@ class Sample01 extends StatelessWidget {
         onTap: (){
           _click(context);
         },
-        child: const Text("我是开始按钮").doGuide(),
+        // child: const Text("我是开始按钮").doGuide(),
       ),
     );
   }

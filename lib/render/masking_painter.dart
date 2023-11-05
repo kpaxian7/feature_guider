@@ -1,20 +1,19 @@
 import 'dart:ui' as ui;
 
-import 'package:feature_guider/model/guider_widget_item.dart';
-import 'package:feature_guider/model/overlay_description.dart';
+import 'package:feature_guider/guide_item.dart';
+import 'package:feature_guider/render/model/masking_option.dart';
+import 'package:feature_guider/render/utils.dart';
 import 'package:flutter/material.dart';
 
-import 'render_helper.dart';
-
-class GuiderPainter extends CustomPainter {
-  final OverlayDescription show;
-  final OverlayDescription? next;
+class MaskingPainter extends CustomPainter {
+  final MaskingOption show;
+  final MaskingOption? next;
   final AnimationController controller;
 
   double descWidth = 0;
   double descHeight = 0;
 
-  GuiderPainter(
+  MaskingPainter(
     this.show,
     this.controller, {
     this.next,
@@ -32,22 +31,22 @@ class GuiderPainter extends CustomPainter {
     double right = 0;
     double bottom = 0;
 
-    left = show.drawRect.left - show.padding.left;
+    left = show.drawRect.left - show.rectPadding.left;
     if (next != null) {
       left = left + (next!.drawRect.left - left) * controller.value;
     }
 
-    top = show.drawRect.top - show.padding.top;
+    top = show.drawRect.top - show.rectPadding.top;
     if (next != null) {
       top = top + (next!.drawRect.top - top) * controller.value;
     }
 
-    right = show.drawRect.right + show.padding.right;
+    right = show.drawRect.right + show.rectPadding.right;
     if (next != null) {
       right = right + (next!.drawRect.right - right) * controller.value;
     }
 
-    bottom = show.drawRect.bottom + show.padding.bottom;
+    bottom = show.drawRect.bottom + show.rectPadding.bottom;
     if (next != null) {
       bottom = bottom + (next!.drawRect.bottom - bottom) * controller.value;
     }
@@ -100,30 +99,29 @@ class GuiderPainter extends CustomPainter {
 
     p.layout(ui.ParagraphConstraints(width: descWidth));
 
-    double widgetCenterX =
-        show.drawRect.left + (show.drawRect.right - show.drawRect.left) / 2;
-    double widgetCenterY =
-        show.drawRect.top + (show.drawRect.bottom - show.drawRect.top) / 2;
+    double top = show.drawRect.top - show.rectPadding.top;
+    double left = show.drawRect.left - show.rectPadding.left;
+    double right = show.drawRect.right + show.rectPadding.right;
+    double bottom = show.drawRect.bottom + show.rectPadding.bottom;
+
+    double widgetCenterX = left + (right - left) / 2;
+    double widgetCenterY = top + (bottom - top) / 2;
 
     double offsetX = 0;
     double offsetY = 0;
 
-    bool endOverflow = show.drawRect.left + descWidth > size.width;
+    bool endOverflow = left + descWidth > size.width;
 
     double interval = 0;
 
     switch (show.position) {
       case DescriptionPosition.auto:
         if (widgetCenterY > size.height / 2) {
-          offsetX = endOverflow
-              ? show.drawRect.right - descWidth
-              : show.drawRect.left;
-          offsetY = show.drawRect.top - descHeight - interval;
+          offsetX = endOverflow ? right - descWidth : left;
+          offsetY = top - descHeight - interval;
         } else {
-          offsetX = endOverflow
-              ? show.drawRect.right - descWidth
-              : show.drawRect.left;
-          offsetY = show.drawRect.bottom + interval;
+          offsetX = endOverflow ? right - descWidth : left;
+          offsetY = bottom + interval;
         }
         break;
       case DescriptionPosition.screenCenter:
@@ -132,21 +130,19 @@ class GuiderPainter extends CustomPainter {
         break;
       case DescriptionPosition.widgetTopCenter:
         offsetX = widgetCenterX - descWidth / 2;
-        offsetY = show.drawRect.top - descHeight - interval;
+        offsetY = top - descHeight - interval;
         break;
       case DescriptionPosition.widgetTopFit:
-        offsetX =
-            endOverflow ? show.drawRect.right - descWidth : show.drawRect.left;
-        offsetY = show.drawRect.top - descHeight - interval;
+        offsetX = endOverflow ? right - descWidth : left;
+        offsetY = top - descHeight - interval;
         break;
       case DescriptionPosition.widgetBottomCenter:
         offsetX = widgetCenterX - descWidth / 2;
-        offsetY = show.drawRect.bottom + interval;
+        offsetY = bottom + interval;
         break;
       case DescriptionPosition.widgetBottomFit:
-        offsetX =
-            endOverflow ? show.drawRect.right - descWidth : show.drawRect.left;
-        offsetY = show.drawRect.bottom + interval;
+        offsetX = endOverflow ? right - descWidth : left;
+        offsetY = bottom + interval;
         break;
     }
 
@@ -156,7 +152,7 @@ class GuiderPainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(GuiderPainter oldDelegate) {
+  bool shouldRepaint(MaskingPainter oldDelegate) {
     return oldDelegate.controller != controller;
   }
 }
