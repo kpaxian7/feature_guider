@@ -28,7 +28,6 @@ class _Test02State extends State<Test02> with WidgetsBindingObserver {
 
     WidgetsBinding.instance.addObserver(this);
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      print("单次Frame绘制回调"); //只回调一次
       manager?.prepare([
         GuideItem(toGuideKey: k1, description: "k1k1"),
         GuideItem(toGuideKey: k2, description: "k2k2"),

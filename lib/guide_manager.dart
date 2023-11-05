@@ -11,6 +11,7 @@ class GuideManager {
   double opacity;
 
   /// The duration of the skip transition, default is 200 milliseconds
+  /// If you do not want animations, you can set the [skipDuration] to [Duration.zero].
   Duration skipDuration;
 
   OverlayEntry? _guideMaskingOverlay;
@@ -190,13 +191,5 @@ class _GuiderOverlayContainerState extends State<GuiderOverlayContainer>
               ),
             ),
           );
-  }
-}
-
-extension GuiderExtension on Widget {
-  doGuide({String? guideDesc, TextStyle? style}) {
-    var key = this.key;
-    print("fetch with widget");
-    print(key);
   }
 }
