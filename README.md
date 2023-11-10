@@ -1,7 +1,7 @@
 # A `lightweight and feature-rich` tool for functional guidance and tips
 
 ## Preview of Effects
-[![sample]](https://github.com/kpaxian7/feature_guider/blob/main/device-2023-11-10-233800.mp4)
+[![sample]()](https://github.com/kpaxian7/feature_guider/blob/main/device-2023-11-10-233800.mp4)
 
 
 ## Feature Introduction
