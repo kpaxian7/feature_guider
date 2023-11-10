@@ -43,7 +43,8 @@ class _SampleDetailPageState extends State<SampleDetailPage> {
         GuideItem(
           description: "Click here to increase the count value",
           toGuideKey: keyCountIncrease,
-          padding: EdgeInsets.zero,
+          padding: EdgeInsets.all(5),
+          borderRadius: const BorderRadius.all(Radius.circular(50)),
         ),
       ]);
       guideManager!.show();

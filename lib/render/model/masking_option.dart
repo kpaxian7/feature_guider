@@ -12,11 +12,14 @@ class MaskingOption {
 
   EdgeInsets rectPadding;
 
+  BorderRadius borderRadius;
+
   MaskingOption(
     this.overlayDesc,
-    this.drawRect, {
-    this.position = DescriptionPosition.auto,
-    this.overlayStyle = const TextStyle(),
-    this.rectPadding = const EdgeInsets.all(4),
-  });
+    this.drawRect,
+    this.position,
+    this.overlayStyle,
+    this.rectPadding,
+    this.borderRadius,
+  );
 }

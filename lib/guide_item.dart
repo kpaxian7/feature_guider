@@ -25,6 +25,9 @@ class GuideItem {
   /// Padding inside the guidance area
   EdgeInsets padding;
 
+  /// Rounded corners for the guidance area
+  BorderRadius borderRadius;
+
   GuideItem({
     required this.description,
     this.toGuideKey,
@@ -32,6 +35,7 @@ class GuideItem {
     this.position = DescriptionPosition.auto,
     this.descriptionStyle = const TextStyle(),
     this.padding = EdgeInsets.zero,
+    this.borderRadius = const BorderRadius.all(Radius.circular(4)),
   });
 }
 

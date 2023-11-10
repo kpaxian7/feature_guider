@@ -59,10 +59,10 @@ class MaskingPainter extends CustomPainter {
         top,
         right,
         bottom,
-        topLeft: const Radius.circular(4),
-        topRight: const Radius.circular(4),
-        bottomLeft: const Radius.circular(4),
-        bottomRight: const Radius.circular(4),
+        topLeft: show.borderRadius.topLeft,
+        topRight: show.borderRadius.topRight,
+        bottomLeft: show.borderRadius.bottomLeft,
+        bottomRight: show.borderRadius.bottomRight,
       ));
 
     final path = Path.combine(PathOperation.difference, outerPath, innerPath);

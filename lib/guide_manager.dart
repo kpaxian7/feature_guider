@@ -64,9 +64,10 @@ class GuideManager {
     _overlayDescArray.add(MaskingOption(
       item.description,
       Rect.fromLTRB(l, t, r, b),
-      position: item.position,
-      overlayStyle: item.descriptionStyle,
-      rectPadding: item.padding,
+      item.position,
+      item.descriptionStyle,
+      item.padding,
+      item.borderRadius,
     ));
   }
 
@@ -83,9 +84,10 @@ class GuideManager {
     _overlayDescArray.add(MaskingOption(
       item.description,
       Rect.fromLTRB(l, t, r, b),
-      position: item.position,
-      overlayStyle: item.descriptionStyle,
-      rectPadding: item.padding,
+      item.position,
+      item.descriptionStyle,
+      item.padding,
+      item.borderRadius,
     ));
   }
 
