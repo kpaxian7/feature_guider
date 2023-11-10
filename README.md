@@ -1,7 +1,7 @@
 # A `lightweight and feature-rich` tool for functional guidance and tips
 
 ## Preview of Effects
-<img alt="Sample" height="480" src="https://github.com/kpaxian7/feature_guider/blob/main/sample-gif.gif" width="270"/>
+<img alt="Sample" height="560" src="https://github.com/kpaxian7/feature_guider/blob/main/sample-gif.gif" width="270"/>
 
 
 ## Feature Introduction
