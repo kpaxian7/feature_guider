@@ -1,7 +1,7 @@
 name: feature_guider
 description: Feature Introduction for First-time Users.
 version: 0.0.1
-homepage:
+homepage: https://github.com/kpaxian7/feature_guider
 
 environment:
   sdk: '>=3.1.1 <4.0.0'
