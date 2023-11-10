@@ -13,10 +13,13 @@ class MaskingPainter extends CustomPainter {
   double descWidth = 0;
   double descHeight = 0;
 
+  double opacity;
+
   MaskingPainter(
     this.show,
     this.controller, {
     this.next,
+    this.opacity = 0.4,
   }) : super(repaint: controller);
 
   @override
@@ -67,7 +70,7 @@ class MaskingPainter extends CustomPainter {
 
     final path = Path.combine(PathOperation.difference, outerPath, innerPath);
 
-    final paint = Paint()..color = Colors.black.withOpacity(0.4);
+    final paint = Paint()..color = Colors.black.withOpacity(opacity);
 
     canvas.drawPath(path, paint);
   }
@@ -128,19 +131,19 @@ class MaskingPainter extends CustomPainter {
         offsetX = (size.width - descWidth) / 2;
         offsetY = (size.height - descHeight) / 2;
         break;
-      case DescriptionPosition.widgetTopCenter:
+      case DescriptionPosition.areaTopCenter:
         offsetX = widgetCenterX - descWidth / 2;
         offsetY = top - descHeight - interval;
         break;
-      case DescriptionPosition.widgetTopFit:
+      case DescriptionPosition.areaTopFit:
         offsetX = endOverflow ? right - descWidth : left;
         offsetY = top - descHeight - interval;
         break;
-      case DescriptionPosition.widgetBottomCenter:
+      case DescriptionPosition.areaBottomCenter:
         offsetX = widgetCenterX - descWidth / 2;
         offsetY = bottom + interval;
         break;
-      case DescriptionPosition.widgetBottomFit:
+      case DescriptionPosition.areaBottomFit:
         offsetX = endOverflow ? right - descWidth : left;
         offsetY = bottom + interval;
         break;

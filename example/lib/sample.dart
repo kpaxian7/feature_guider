@@ -10,13 +10,11 @@ main() {
 class SamplePage extends StatelessWidget {
   const SamplePage({Key? key}) : super(key: key);
 
-  _showGuideDirect(BuildContext context) {
+  _showGuide(BuildContext context) {
     Navigator.of(context).push(MaterialPageRoute(builder: (ctx) {
       return const SampleDetailPage();
     }));
   }
-
-  _showGuideWithClick() {}
 
   @override
   Widget build(BuildContext context) {
@@ -27,22 +25,14 @@ class SamplePage extends StatelessWidget {
           children: [
             ElevatedButton(
                 onPressed: (){
-                  _showGuideDirect(context);
+                  _showGuide(context);
                 },
                 child: const Text(
-                  "进入直接展示guide",
+                  "Show Page",
                   style: TextStyle(
                     fontSize: 30,
                   ),
                 )),
-            ElevatedButton(
-                onPressed: _showGuideWithClick,
-                child: const Text(
-                  "点击按钮展示guide",
-                  style: TextStyle(
-                    fontSize: 30,
-                  ),
-                ))
           ],
         ),
       ),

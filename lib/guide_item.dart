@@ -5,7 +5,7 @@ class GuideItem {
   String description;
 
   /// The key of the widget to be highlighted for guidance, used to calculate position (or you can use a fixed Rect to define the position)
-  Key? toGuideKey;
+  GlobalKey? toGuideKey;
 
   /// The Rect that defines the target position for the guidance
   Rect? toGuideRect;
@@ -41,9 +41,9 @@ class GuideItem {
 
 enum DescriptionPosition {
   screenCenter,
-  widgetTopCenter,
-  widgetTopFit,
-  widgetBottomCenter,
-  widgetBottomFit,
+  areaTopCenter,
+  areaTopFit,
+  areaBottomCenter,
+  areaBottomFit,
   auto,
 }

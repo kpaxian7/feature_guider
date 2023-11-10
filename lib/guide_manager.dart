@@ -190,6 +190,7 @@ class _GuiderOverlayContainerState extends State<GuiderOverlayContainer>
                 start!,
                 animController!,
                 next: next,
+                opacity: widget.opacity
               ),
             ),
           );

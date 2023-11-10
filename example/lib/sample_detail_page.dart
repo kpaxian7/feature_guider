@@ -23,7 +23,7 @@ class _SampleDetailPageState extends State<SampleDetailPage> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      guideManager ??= GuideManager(context, opacity: 0.8);
+      guideManager ??= GuideManager(context, opacity: 0.7);
       guideManager!.prepare([
         GuideItem(
           description: "Click here to go back",
@@ -36,14 +36,14 @@ class _SampleDetailPageState extends State<SampleDetailPage> {
           padding: EdgeInsets.zero,
         ),
         GuideItem(
-          description: "This is where the count value is displayed",
+          description: "The area of the 'count' displayed",
           toGuideKey: keyCountDisplay,
           padding: EdgeInsets.zero,
         ),
         GuideItem(
-          description: "Click here to increase the count value",
+          description: "Click here to increase the 'count'",
           toGuideKey: keyCountIncrease,
-          padding: EdgeInsets.all(5),
+          padding: const EdgeInsets.all(5),
           borderRadius: const BorderRadius.all(Radius.circular(50)),
         ),
       ]);
@@ -79,7 +79,11 @@ class _SampleDetailPageState extends State<SampleDetailPage> {
       ),
       floatingActionButton: FloatingActionButton(
         key: keyCountIncrease,
-        onPressed: () {},
+        onPressed: () {
+          setState(() {
+            count++;
+          });
+        },
         child: Container(
           padding: const EdgeInsets.all(8),
           decoration: const BoxDecoration(
