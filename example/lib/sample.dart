@@ -1,35 +1,50 @@
+import 'package:feature_guider_example/sample_detail_page.dart';
 import 'package:flutter/material.dart';
 
 main() {
   runApp(const MaterialApp(
-    home: Sample01(),
+    home: SamplePage(),
   ));
 }
 
-class Sample01 extends StatelessWidget {
-  const Sample01({Key? key}) : super(key: key);
+class SamplePage extends StatelessWidget {
+  const SamplePage({Key? key}) : super(key: key);
 
-  _click(BuildContext context){
-    // GuiderOverlayManager.instance().showGuider(context);
+  _showGuideDirect(BuildContext context) {
+    Navigator.of(context).push(MaterialPageRoute(builder: (ctx) {
+      return const SampleDetailPage();
+    }));
   }
+
+  _showGuideWithClick() {}
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("testSample01"),
-      ),
-      body: _buildBody(context),
-    );
-  }
-
-  _buildBody(BuildContext context) {
-    return Center(
-      child: GestureDetector(
-        onTap: (){
-          _click(context);
-        },
-        // child: const Text("我是开始按钮").doGuide(),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            ElevatedButton(
+                onPressed: (){
+                  _showGuideDirect(context);
+                },
+                child: const Text(
+                  "进入直接展示guide",
+                  style: TextStyle(
+                    fontSize: 30,
+                  ),
+                )),
+            ElevatedButton(
+                onPressed: _showGuideWithClick,
+                child: const Text(
+                  "点击按钮展示guide",
+                  style: TextStyle(
+                    fontSize: 30,
+                  ),
+                ))
+          ],
+        ),
       ),
     );
   }

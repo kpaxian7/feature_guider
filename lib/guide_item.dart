@@ -31,7 +31,7 @@ class GuideItem {
     this.toGuideRect,
     this.position = DescriptionPosition.auto,
     this.descriptionStyle = const TextStyle(),
-    this.padding = const EdgeInsets.all(2),
+    this.padding = EdgeInsets.zero,
   });
 }
 

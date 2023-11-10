@@ -11,8 +11,8 @@ class GuideManager {
   double opacity;
 
   /// The duration of the skip transition, default is 200 milliseconds
-  /// If you do not want animations, you can set the [skipDuration] to [Duration.zero].
-  Duration skipDuration;
+  /// If you do not want animations, you can set the [duration] to [Duration.zero].
+  Duration duration;
 
   OverlayEntry? _guideMaskingOverlay;
   final List<MaskingOption> _overlayDescArray = [];
@@ -20,7 +20,7 @@ class GuideManager {
   GuideManager(
     this.context, {
     this.opacity = 0.4,
-    this.skipDuration = const Duration(milliseconds: 200),
+    this.duration = const Duration(milliseconds: 200),
   });
 
   prepare(List<GuideItem> guiderWidgetList) {
@@ -94,7 +94,7 @@ class GuideManager {
       return GuiderOverlayContainer(
         _overlayDescArray,
         opacity,
-        skipDuration,
+        duration,
         _dismiss,
       );
     });
