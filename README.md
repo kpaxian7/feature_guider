@@ -1,5 +1,8 @@
 # A `lightweight and feature-rich` tool for functional guidance and tips
 
+[English](https://github.com/kpaxian7/feature_guider/blob/main/README.md)
+[中文](https://github.com/kpaxian7/feature_guider/blob/main/README-zh.md)
+
 ## Preview of Effects
 <img alt="Sample" height="560" src="https://github.com/kpaxian7/feature_guider/blob/main/sample-gif.gif" width="270"/>
 
@@ -14,7 +17,6 @@
 - Supports setting the border radius for the tip text
 
 ## Usage
-
 ```dart
 WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
   guideManager ??= GuideManager(context, opacity: 0.7);
