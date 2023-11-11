@@ -4,7 +4,7 @@
 [中文](https://github.com/kpaxian7/feature_guider/blob/main/README-zh.md)
 
 ## 效果预览
-<img alt="Sample" height="560" src="https://github.com/kpaxian7/feature_guider/blob/main/sample-gif.gif" width="270"/>
+<img alt="Sample" height="560" src="https://raw.githubusercontent.com/kpaxian7/feature_guider/main/sample-gif.gif" width="270"/>
 
 
 ## 功能介绍

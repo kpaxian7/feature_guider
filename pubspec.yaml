@@ -1,10 +1,10 @@
 name: feature_guider
 description: Feature Introduction for First-time Users.
-version: 0.0.1
+version: 0.0.2
 homepage: https://github.com/kpaxian7/feature_guider
 
 environment:
-  sdk: '>=3.1.1 <4.0.0'
+  sdk: '>=2.19.2 <4.0.0'
   flutter: '>=3.3.0'
 
 dependencies:
