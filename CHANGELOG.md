@@ -5,3 +5,7 @@
 ## 0.0.2
 
 * ReadMe & Example updated.
+
+## 0.0.3
+
+* Support description interval setting.
