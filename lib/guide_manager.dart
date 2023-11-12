@@ -68,6 +68,7 @@ class GuideManager {
       item.descriptionStyle,
       item.padding,
       item.borderRadius,
+      item.textInterval,
     ));
   }
 
@@ -88,6 +89,7 @@ class GuideManager {
       item.descriptionStyle,
       item.padding,
       item.borderRadius,
+      item.textInterval,
     ));
   }
 
@@ -186,12 +188,8 @@ class _GuiderOverlayContainerState extends State<GuiderOverlayContainer>
                 MediaQuery.of(context).size.width,
                 MediaQuery.of(context).size.height,
               ),
-              painter: MaskingPainter(
-                start!,
-                animController!,
-                next: next,
-                opacity: widget.opacity
-              ),
+              painter: MaskingPainter(start!, animController!,
+                  next: next, opacity: widget.opacity),
             ),
           );
   }

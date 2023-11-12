@@ -115,7 +115,7 @@ class MaskingPainter extends CustomPainter {
 
     bool endOverflow = left + descWidth > size.width;
 
-    double interval = 0;
+    double interval = show.descInterval;
 
     switch (show.position) {
       case DescriptionPosition.auto:

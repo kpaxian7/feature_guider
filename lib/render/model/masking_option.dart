@@ -14,6 +14,8 @@ class MaskingOption {
 
   BorderRadius borderRadius;
 
+  double descInterval;
+
   MaskingOption(
     this.overlayDesc,
     this.drawRect,
@@ -21,5 +23,6 @@ class MaskingOption {
     this.overlayStyle,
     this.rectPadding,
     this.borderRadius,
+    this.descInterval,
   );
 }

@@ -28,6 +28,9 @@ class GuideItem {
   /// Rounded corners for the guidance area
   BorderRadius borderRadius;
 
+  /// The interval between description and guidance area.
+  double textInterval;
+
   GuideItem({
     required this.description,
     this.toGuideKey,
@@ -36,6 +39,7 @@ class GuideItem {
     this.descriptionStyle = const TextStyle(),
     this.padding = EdgeInsets.zero,
     this.borderRadius = const BorderRadius.all(Radius.circular(4)),
+    this.textInterval = 4,
   });
 }
 

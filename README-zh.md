@@ -13,8 +13,10 @@
 - 支持动画过渡时长设置
 - 支持提示文本自定义样式设置
 - 支持提示文本位置预制选项设置
-- 支持提示文本内边距设置
-- 支持提示文本圆角设置
+- 支持提示区域内边距设置
+- 支持提示区域圆角设置
+- 支持提示文本与提示区域间距设置
+
 
 ## 使用方式
 ```dart
@@ -42,14 +44,15 @@ WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
 
 ## GuideItem
 
-| description | 提示文案                                                                                                   |
-| --- |--------------------------------------------------------------------------------------------------------|
-| toGuideKey | 传入一个GlobalKey，用于定位提示区                                                                                  |
-| toGuideRect | 传入一个Rect，用于定位提示区                                                                                       |
-| position | 文本展示在提示区的方位枚举，预设 `screenCenter`、`areaTopCenter`、`areaTopFit`、`areaBottomCenter`、`areaBottomFit`、`auto` |
+| description      | 提示文案                                                                                                   |
+|------------------|--------------------------------------------------------------------------------------------------------|
+| toGuideKey       | 传入一个GlobalKey，用于定位提示区                                                                                  |
+| toGuideRect      | 传入一个Rect，用于定位提示区                                                                                       |
+| position         | 文本展示在提示区的方位枚举，预设 `screenCenter`、`areaTopCenter`、`areaTopFit`、`areaBottomCenter`、`areaBottomFit`、`auto` |
 | descriptionStyle | 提示文案TextStyle                                                                                          |
-| padding | 提示文案区域内边距                                                                                              |
-| borderRadius | 提示文案区域圆角                                                                                               |
+| padding          | 提示区域内边距                                                                                                |
+| borderRadius     | 提示区域圆角                                                                                                 |
+| textInterval     | 提示文案与提示区域的间距                                                                                           |
 
 ## DescriptionPosition
 - `screenCenter` - 屏幕中心
