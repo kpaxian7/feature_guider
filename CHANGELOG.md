@@ -9,3 +9,7 @@
 ## 0.0.3
 
 * Support description interval setting.
+
+## 0.0.4
+
+* Fix bug
