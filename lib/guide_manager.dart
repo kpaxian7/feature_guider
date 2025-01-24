@@ -171,7 +171,7 @@ class _GuiderOverlayContainerState extends State<GuiderOverlayContainer>
     if (next == null) {
       widget.dismissCallback.call();
     } else {
-      animController?.animateTo(1, duration: const Duration(milliseconds: 180));
+      animController?.animateTo(1, duration: widget.duration);
     }
   }
 

@@ -23,7 +23,8 @@ class _SampleDetailPageState extends State<SampleDetailPage> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      guideManager ??= GuideManager(context, opacity: 0.7);
+      guideManager ??= GuideManager(context,
+          opacity: 0.7, duration: const Duration(milliseconds: 200));
       guideManager!.prepare([
         GuideItem(
           description: "Click here to go back",
@@ -31,10 +32,10 @@ class _SampleDetailPageState extends State<SampleDetailPage> {
           padding: EdgeInsets.zero,
         ),
         GuideItem(
-          description: "This is the title of this page",
-          toGuideKey: keyAppBarTitle,
-          padding: EdgeInsets.zero,
-        ),
+            description: "This is the title of this page",
+            toGuideKey: keyAppBarTitle,
+            padding: EdgeInsets.zero,
+            descriptionStyle: TextStyle(color: Colors.red)),
         GuideItem(
           description: "The area of the 'count' displayed",
           toGuideKey: keyCountDisplay,
