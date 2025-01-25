@@ -27,25 +27,29 @@ class _SampleDetailPageState extends State<SampleDetailPage> {
           opacity: 0.7, duration: const Duration(milliseconds: 200));
       guideManager!.prepare([
         GuideItem(
-          description: "Click here to go back",
+          descriptionText: "Click here to go back",
+          descriptionStyle: TextStyle(color: Colors.white),
           toGuideKey: keyAppBarBack,
-          padding: EdgeInsets.zero,
+          position: DescriptionPosition.alignBottomLeft,
         ),
         GuideItem(
-            description: "This is the title of this page",
-            toGuideKey: keyAppBarTitle,
+          descriptionText: "This is the title of this page",
+          toGuideKey: keyAppBarTitle,
+          padding: EdgeInsets.only(left: 20, right: 20),
+          descriptionStyle: TextStyle(color: Colors.red),
+          position: DescriptionPosition.alignBottomRight,
+        ),
+        GuideItem(
+            descriptionText: "The area of the 'count' displayed",
+            toGuideKey: keyCountDisplay,
             padding: EdgeInsets.zero,
-            descriptionStyle: TextStyle(color: Colors.red)),
+            position: DescriptionPosition.alignTopLeft),
         GuideItem(
-          description: "The area of the 'count' displayed",
-          toGuideKey: keyCountDisplay,
-          padding: EdgeInsets.zero,
-        ),
-        GuideItem(
-          description: "Click here to increase the 'count'",
+          descriptionText: "Click here to increase the 'count'",
           toGuideKey: keyCountIncrease,
           padding: const EdgeInsets.all(5),
           borderRadius: const BorderRadius.all(Radius.circular(50)),
+          position: DescriptionPosition.alignTopRight,
         ),
       ]);
       guideManager!.show();

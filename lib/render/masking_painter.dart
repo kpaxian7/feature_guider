@@ -2,7 +2,7 @@ import 'dart:ui' as ui;
 
 import 'package:feature_guider/guide_item.dart';
 import 'package:feature_guider/render/model/masking_option.dart';
-import 'package:feature_guider/render/utils.dart';
+import 'package:feature_guider/utils.dart';
 import 'package:flutter/material.dart';
 
 class MaskingPainter extends CustomPainter {
@@ -25,7 +25,7 @@ class MaskingPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     _drawMasking(canvas, size);
-    _drawDescription(canvas, size);
+    // _drawDescription(canvas, size);
   }
 
   _drawMasking(Canvas canvas, Size size) {
@@ -36,22 +36,26 @@ class MaskingPainter extends CustomPainter {
 
     left = show.drawRect.left - show.rectPadding.left;
     if (next != null) {
-      left = left + (next!.drawRect.left - left) * controller.value;
+      double nextLeft = next!.drawRect.left - next!.rectPadding.left;
+      left = left + (nextLeft - left) * controller.value;
     }
 
     top = show.drawRect.top - show.rectPadding.top;
     if (next != null) {
-      top = top + (next!.drawRect.top - top) * controller.value;
+      double nextTop = next!.drawRect.top - next!.rectPadding.top;
+      top = top + (nextTop - top) * controller.value;
     }
 
     right = show.drawRect.right + show.rectPadding.right;
     if (next != null) {
-      right = right + (next!.drawRect.right - right) * controller.value;
+      double nextRight = next!.drawRect.right + next!.rectPadding.right;
+      right = right + (nextRight - right) * controller.value;
     }
 
     bottom = show.drawRect.bottom + show.rectPadding.bottom;
     if (next != null) {
-      bottom = bottom + (next!.drawRect.bottom - bottom) * controller.value;
+      double nextBottom = next!.drawRect.bottom + next!.rectPadding.bottom;
+      bottom = bottom + (nextBottom - bottom) * controller.value;
     }
 
     final outerPath = Path()
@@ -113,17 +117,17 @@ class MaskingPainter extends CustomPainter {
     double offsetX = 0;
     double offsetY = 0;
 
-    bool endOverflow = left + descWidth > size.width;
+    // bool endOverflow = left + descWidth > size.width;
 
     double interval = show.descInterval;
 
     switch (show.position) {
       case DescriptionPosition.auto:
+        offsetX = left;
         if (widgetCenterY > size.height / 2) {
-          offsetX = endOverflow ? right - descWidth : left;
           offsetY = top - descHeight - interval;
+          // offsetX = endOverflow ? right - descWidth : left;
         } else {
-          offsetX = endOverflow ? right - descWidth : left;
           offsetY = bottom + interval;
         }
         break;
@@ -131,20 +135,20 @@ class MaskingPainter extends CustomPainter {
         offsetX = (size.width - descWidth) / 2;
         offsetY = (size.height - descHeight) / 2;
         break;
-      case DescriptionPosition.areaTopCenter:
-        offsetX = widgetCenterX - descWidth / 2;
+      case DescriptionPosition.alignTopLeft:
+        offsetX = left;
         offsetY = top - descHeight - interval;
         break;
-      case DescriptionPosition.areaTopFit:
-        offsetX = endOverflow ? right - descWidth : left;
+      case DescriptionPosition.alignTopRight:
+        offsetX = right - descWidth;
         offsetY = top - descHeight - interval;
         break;
-      case DescriptionPosition.areaBottomCenter:
-        offsetX = widgetCenterX - descWidth / 2;
+      case DescriptionPosition.alignBottomLeft:
+        offsetX = left;
         offsetY = bottom + interval;
         break;
-      case DescriptionPosition.areaBottomFit:
-        offsetX = endOverflow ? right - descWidth : left;
+      case DescriptionPosition.alignBottomRight:
+        offsetX = right - descWidth;
         offsetY = bottom + interval;
         break;
     }

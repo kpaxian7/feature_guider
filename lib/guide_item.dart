@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 
 class GuideItem {
-  /// Description for single feature item
-  String description;
+  /// Description text for single feature item
+  String? descriptionText;
+
+  /// Description widget for single feature item
+  Widget? descriptionWidget;
 
   /// The key of the widget to be highlighted for guidance, used to calculate position (or you can use a fixed Rect to define the position)
   GlobalKey? toGuideKey;
@@ -29,25 +32,27 @@ class GuideItem {
   BorderRadius borderRadius;
 
   /// The interval between description and guidance area.
-  double textInterval;
+  double descriptionInterval;
 
   GuideItem({
-    required this.description,
+    this.descriptionText,
+    this.descriptionWidget,
     this.toGuideKey,
     this.toGuideRect,
     this.position = DescriptionPosition.auto,
     this.descriptionStyle = const TextStyle(),
     this.padding = EdgeInsets.zero,
     this.borderRadius = const BorderRadius.all(Radius.circular(4)),
-    this.textInterval = 4,
-  });
+    this.descriptionInterval = 4,
+  }) : assert(descriptionText != null || descriptionWidget != null,
+            "Either 'descriptionText' or 'descriptionWidget' must be provided. Neither can be null.");
 }
 
 enum DescriptionPosition {
   screenCenter,
-  areaTopCenter,
-  areaTopFit,
-  areaBottomCenter,
-  areaBottomFit,
+  alignTopLeft,
+  alignTopRight,
+  alignBottomLeft,
+  alignBottomRight,
   auto,
 }

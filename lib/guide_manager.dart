@@ -1,5 +1,6 @@
 import 'package:feature_guider/guide_item.dart';
 import 'package:feature_guider/render/masking_painter.dart';
+import 'package:feature_guider/render/masking_stack.dart';
 import 'package:feature_guider/render/model/masking_option.dart';
 import 'package:flutter/material.dart';
 
@@ -27,7 +28,7 @@ class GuideManager {
     _overlayDescArray.clear();
     for (GuideItem item in guiderWidgetList) {
       assert(item.toGuideKey != null || item.toGuideRect != null,
-          "Either 'toGuideKey' or 'toGuideRect' must be provided; both cannot be null.");
+          "Either 'toGuideKey' or 'toGuideRect' must be provided. Neither can be null.");
       if (item.toGuideKey is GlobalKey) {
         _assembleLTRBFromKey(item);
       }
@@ -62,13 +63,13 @@ class GuideManager {
       r = l + widgetWidth;
     }
     _overlayDescArray.add(MaskingOption(
-      item.description,
+      item.descriptionText ?? "",
       Rect.fromLTRB(l, t, r, b),
       item.position,
       item.descriptionStyle,
       item.padding,
       item.borderRadius,
-      item.textInterval,
+      item.descriptionInterval,
     ));
   }
 
@@ -83,13 +84,13 @@ class GuideManager {
     r = item.toGuideRect!.right;
     b = item.toGuideRect!.bottom;
     _overlayDescArray.add(MaskingOption(
-      item.description,
+      item.descriptionText ?? "",
       Rect.fromLTRB(l, t, r, b),
       item.position,
       item.descriptionStyle,
       item.padding,
       item.borderRadius,
-      item.textInterval,
+      item.descriptionInterval,
     ));
   }
 
@@ -177,20 +178,39 @@ class _GuiderOverlayContainerState extends State<GuiderOverlayContainer>
 
   @override
   Widget build(BuildContext context) {
+    print("show ==  ${start?.overlayDesc}");
+    print("next ==  ${next?.overlayDesc}");
+
     return start == null && next == null
         ? Container()
         : GestureDetector(
             onTap: () {
               _guideContinue();
             },
-            child: CustomPaint(
-              size: Size(
-                MediaQuery.of(context).size.width,
-                MediaQuery.of(context).size.height,
-              ),
-              painter: MaskingPainter(start!, animController!,
-                  next: next, opacity: widget.opacity),
+            child: MaskingStack(
+              show: start!,
+              controller: animController!,
+              next: next,
+              opacity: widget.opacity,
             ),
           );
   }
+// @override
+// Widget build(BuildContext context) {
+//   return start == null && next == null
+//       ? Container()
+//       : GestureDetector(
+//           onTap: () {
+//             _guideContinue();
+//           },
+//           child: CustomPaint(
+//             size: Size(
+//               MediaQuery.of(context).size.width,
+//               MediaQuery.of(context).size.height,
+//             ),
+//             painter: MaskingPainter(start!, animController!,
+//                 next: next, opacity: widget.opacity),
+//           ),
+//         );
+// }
 }
