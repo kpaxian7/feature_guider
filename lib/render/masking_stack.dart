@@ -77,10 +77,9 @@ class _MaskingStackState extends State<MaskingStack> {
     double left = show.drawRect.left - show.rectPadding.left;
     double right = show.drawRect.right + show.rectPadding.right;
     double bottom = show.drawRect.bottom + show.rectPadding.bottom;
-    print(
-        "\ntop = $top"+
-        "\nleft = $left"+
-        "\nright = $right"+
+    print("\ntop = $top" +
+        "\nleft = $left" +
+        "\nright = $right" +
         "\nbottom = $bottom");
 
     double? descriptionLeft;
@@ -94,7 +93,12 @@ class _MaskingStackState extends State<MaskingStack> {
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
 
+    bool showCenter = false;
+
     switch (show.position) {
+      case DescriptionPosition.screenCenter:
+        showCenter = true;
+        break;
       case DescriptionPosition.auto:
         descriptionLeft = left;
         if (widgetCenterY > screenHeight / 2) {
@@ -107,10 +111,6 @@ class _MaskingStackState extends State<MaskingStack> {
         } else {
           descriptionRight = right;
         }
-        break;
-      case DescriptionPosition.screenCenter:
-        // offsetX = (size.width - descWidth) / 2;
-        // offsetY = (size.height - descHeight) / 2;
         break;
       case DescriptionPosition.alignTopLeft:
         descriptionLeft = left;
@@ -142,6 +142,12 @@ class _MaskingStackState extends State<MaskingStack> {
         style: show.overlayStyle,
       ),
     );
+
+    if (showCenter) {
+      actualDescriptionWidget = Center(
+        child: actualDescriptionWidget,
+      );
+    }
 
     return Positioned(
       left: descriptionLeft,
