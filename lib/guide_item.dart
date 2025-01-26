@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 
 class GuideItem {
-  // /// Description text for single feature item
-  // String? descriptionText;
 
   /// Description widget for single feature item
   Widget? descriptionWidget;
@@ -15,15 +13,12 @@ class GuideItem {
 
   /// Enumeration for the position of the text hint, includes the following:
   /// [screenCenter]: Center of the screen
-  /// [widgetTopCenter]: Centered at the top of the target area
-  /// [widgetTopFit]: Top of the target area with adaptive fitting
-  /// [widgetBottomCenter]: Centered at the bottom of the target area
-  /// [widgetBottomFit]: Bottom of the target area with adaptive fitting
+  /// [alignTopLeft]: Positions the content above the target area, aligned to the left side
+  /// [alignTopRight]: Positions the content above the target area, aligned to the right side
+  /// [alignBottomLeft]: Positions the content below the target area, aligned to the left side
+  /// [alignBottomRight]: Positions the content below the target area, aligned to the right side
   /// [auto]: Automatically determined based on the position of your component and the dimensions of the text
   DescriptionPosition position;
-
-  // /// Style for the guidance text
-  // TextStyle descriptionStyle;
 
   /// Padding inside the guidance area
   EdgeInsets padding;
@@ -35,12 +30,10 @@ class GuideItem {
   double descriptionInterval;
 
   GuideItem({
-    // this.descriptionText,
     this.descriptionWidget,
     this.toGuideKey,
     this.toGuideRect,
     this.position = DescriptionPosition.auto,
-    // this.descriptionStyle = const TextStyle(),
     this.padding = EdgeInsets.zero,
     this.borderRadius = const BorderRadius.all(Radius.circular(4)),
     this.descriptionInterval = 4,

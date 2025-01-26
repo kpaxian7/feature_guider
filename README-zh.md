@@ -8,14 +8,14 @@
 
 
 ## 功能介绍
+- 支持自定义提示说明小组件
 - 支持`Widget#key` 或 `Rect`锁定提示位置
 - 支持背景蒙版透明度设置
 - 支持动画过渡时长设置
-- 支持提示文本自定义样式设置
-- 支持提示文本位置预制选项设置
+- 支持提示描述组件预制选项设置
 - 支持提示区域内边距设置
 - 支持提示区域圆角设置
-- 支持提示文本与提示区域间距设置
+- 支持提示描述组件与提示区域间距设置
 
 
 ## 使用方式
@@ -44,20 +44,20 @@ WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
 
 ## GuideItem
 
-| description      | 提示文案                                                                                                   |
-|------------------|--------------------------------------------------------------------------------------------------------|
-| toGuideKey       | 传入一个GlobalKey，用于定位提示区                                                                                  |
-| toGuideRect      | 传入一个Rect，用于定位提示区                                                                                       |
-| position         | 文本展示在提示区的方位枚举，预设 `screenCenter`、`areaTopCenter`、`areaTopFit`、`areaBottomCenter`、`areaBottomFit`、`auto` |
-| descriptionStyle | 提示文案TextStyle                                                                                          |
-| padding          | 提示区域内边距                                                                                                |
-| borderRadius     | 提示区域圆角                                                                                                 |
-| textInterval     | 提示文案与提示区域的间距                                                                                           |
+| 参数                | 描述                                                                                                     |
+|-------------------|--------------------------------------------------------------------------------------------------------|
+| descriptionWidget | 提示描述组件                                                                                                 |
+| toGuideKey        | 传入一个GlobalKey，用于定位提示区                                                                                  |
+| toGuideRect       | 传入一个Rect，用于定位提示区                                                                                       |
+| position          | 文本展示在提示区的方位枚举，预设 `screenCenter`、`alignTopLeft`、`alignTopRight`、`alignBottomLeft`、`alignBottomRight`、`auto` |
+| padding           | 提示区域内边距                                                                                                |
+| borderRadius      | 提示区域圆角                                                                                                 |
+| textInterval      | 提示文案与提示区域的间距                                                                                           |
 
 ## DescriptionPosition
 - `screenCenter` - 屏幕中心
-- `areaTopCenter` - 提示区域顶部居中
-- `areaTopFit` - 提示区域顶部自适应（优先`AlignRight`于提示区，若尾部超出屏幕宽度，则`AlignLeft`）
-- `areaBottomCenter` - 提示区域底部居中
-- `areaBottomFit` - 提示区域底部自适应（优先`AlignRight`于提示区，若尾部超出屏幕宽度，则`AlignLeft`）
-- `auto` - 提示区在屏幕上半区域时，展示在区域下方，否则展示在上方；且同时应用上述Fit属性
+- `alignTopLeft` - 提示区域顶部&左侧对齐
+- `alignTopRight` - 提示区域顶部&右侧对齐
+- `alignBottomLeft` - 提示区域底部&左侧对齐
+- `alignBottomRight` - 提示区域底部&右侧对齐
+- `auto` - 提示区在屏幕上半区域时，展示在区域下方，否则展示在上方；左右侧展示时同理
