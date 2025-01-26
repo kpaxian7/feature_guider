@@ -13,3 +13,9 @@
 ## 0.0.4
 
 * Fix bug
+
+## 1.0.0
+
+* Support custom widget for description.
+* Re-optimized the usage of the position parameter.
+* Fix bug.
