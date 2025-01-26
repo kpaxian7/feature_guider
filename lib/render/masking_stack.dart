@@ -41,9 +41,22 @@ class _MaskingStackState extends State<MaskingStack> {
     return widget.opacity ?? 0.4;
   }
 
+  bool descriptionShow = true;
+
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
+  void initState() {
+    super.initState();
+    controller.addListener(() {
+      bool lastDescriptionShow = descriptionShow;
+      if (controller.value != 0) {
+        descriptionShow = false;
+      } else {
+        descriptionShow = true;
+      }
+      if (lastDescriptionShow != descriptionShow) {
+        setState(() {});
+      }
+    });
   }
 
   @override
@@ -73,6 +86,9 @@ class _MaskingStackState extends State<MaskingStack> {
   }
 
   Widget buildMaskingDescription(BuildContext context) {
+    if (!descriptionShow) {
+      return Container();
+    }
     double top = show.drawRect.top - show.rectPadding.top;
     double left = show.drawRect.left - show.rectPadding.left;
     double right = show.drawRect.right + show.rectPadding.right;
@@ -100,16 +116,15 @@ class _MaskingStackState extends State<MaskingStack> {
         showCenter = true;
         break;
       case DescriptionPosition.auto:
-        descriptionLeft = left;
         if (widgetCenterY > screenHeight / 2) {
-          descriptionTop = bottom + show.descInterval;
+          descriptionBottom = (screenHeight - top) + show.descInterval;
         } else {
-          descriptionBottom = top + show.descInterval;
+          descriptionTop = bottom + show.descInterval;
         }
         if (widgetCenterX > screenWidth / 2) {
-          descriptionLeft = left;
+          descriptionRight = screenWidth - right;
         } else {
-          descriptionRight = right;
+          descriptionLeft = left;
         }
         break;
       case DescriptionPosition.alignTopLeft:
