@@ -63,10 +63,10 @@ class GuideManager {
       r = l + widgetWidth;
     }
     _overlayDescArray.add(MaskingOption(
-      item.descriptionText ?? "",
+      item.descriptionWidget ?? Container(),
       Rect.fromLTRB(l, t, r, b),
       item.position,
-      item.descriptionStyle,
+      // item.descriptionStyle,
       item.padding,
       item.borderRadius,
       item.descriptionInterval,
@@ -84,10 +84,10 @@ class GuideManager {
     r = item.toGuideRect!.right;
     b = item.toGuideRect!.bottom;
     _overlayDescArray.add(MaskingOption(
-      item.descriptionText ?? "",
+      item.descriptionWidget ?? Container(),
       Rect.fromLTRB(l, t, r, b),
       item.position,
-      item.descriptionStyle,
+      // item.descriptionStyle,
       item.padding,
       item.borderRadius,
       item.descriptionInterval,
@@ -178,8 +178,8 @@ class _GuiderOverlayContainerState extends State<GuiderOverlayContainer>
 
   @override
   Widget build(BuildContext context) {
-    print("show ==  ${start?.overlayDesc}");
-    print("next ==  ${next?.overlayDesc}");
+    // print("show ==  ${start?.overlayDesc}");
+    // print("next ==  ${next?.overlayDesc}");
 
     return start == null && next == null
         ? Container()

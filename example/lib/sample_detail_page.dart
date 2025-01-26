@@ -27,25 +27,41 @@ class _SampleDetailPageState extends State<SampleDetailPage> {
           opacity: 0.7, duration: const Duration(milliseconds: 200));
       guideManager!.prepare([
         GuideItem(
-          descriptionText: "Click here to go back",
-          descriptionStyle: TextStyle(color: Colors.white),
+          // descriptionText: "Click here to go back",
+          // descriptionStyle: TextStyle(color: Colors.white),
+          descriptionWidget: Text(
+            "Click here to go back",
+            style: TextStyle(color: Colors.white),
+          ),
           toGuideKey: keyAppBarBack,
           position: DescriptionPosition.alignBottomLeft,
         ),
         GuideItem(
-          descriptionText: "This is the title of this page",
+          descriptionWidget: Text(
+            "This is the title of this page",
+            style: TextStyle(color: Colors.white),
+          ),
+          // descriptionText: "This is the title of this page",
           toGuideKey: keyAppBarTitle,
           padding: EdgeInsets.only(left: 20, right: 20),
-          descriptionStyle: TextStyle(color: Colors.red),
+          // descriptionStyle: TextStyle(color: Colors.red),
           position: DescriptionPosition.alignBottomRight,
         ),
         GuideItem(
-            descriptionText: "The area of the 'count' displayed",
+            descriptionWidget: Text(
+              "The area of the 'count' displayed",
+              style: TextStyle(color: Colors.white),
+            ),
+            // descriptionText: "The area of the 'count' displayed",
             toGuideKey: keyCountDisplay,
             padding: EdgeInsets.zero,
             position: DescriptionPosition.alignTopLeft),
         GuideItem(
-          descriptionText: "Click here to increase the 'count'",
+          descriptionWidget: Text(
+            "Click here to increase the 'count'",
+            style: TextStyle(color: Colors.white),
+          ),
+          // descriptionText: "Click here to increase the 'count'",
           toGuideKey: keyCountIncrease,
           padding: const EdgeInsets.all(5),
           borderRadius: const BorderRadius.all(Radius.circular(50)),

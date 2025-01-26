@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class GuideItem {
-  /// Description text for single feature item
-  String? descriptionText;
+  // /// Description text for single feature item
+  // String? descriptionText;
 
   /// Description widget for single feature item
   Widget? descriptionWidget;
@@ -22,8 +22,8 @@ class GuideItem {
   /// [auto]: Automatically determined based on the position of your component and the dimensions of the text
   DescriptionPosition position;
 
-  /// Style for the guidance text
-  TextStyle descriptionStyle;
+  // /// Style for the guidance text
+  // TextStyle descriptionStyle;
 
   /// Padding inside the guidance area
   EdgeInsets padding;
@@ -35,17 +35,18 @@ class GuideItem {
   double descriptionInterval;
 
   GuideItem({
-    this.descriptionText,
+    // this.descriptionText,
     this.descriptionWidget,
     this.toGuideKey,
     this.toGuideRect,
     this.position = DescriptionPosition.auto,
-    this.descriptionStyle = const TextStyle(),
+    // this.descriptionStyle = const TextStyle(),
     this.padding = EdgeInsets.zero,
     this.borderRadius = const BorderRadius.all(Radius.circular(4)),
     this.descriptionInterval = 4,
-  }) : assert(descriptionText != null || descriptionWidget != null,
-            "Either 'descriptionText' or 'descriptionWidget' must be provided. Neither can be null.");
+  }) ;
+  // : assert(descriptionText != null || descriptionWidget != null,
+  //           "Either 'descriptionText' or 'descriptionWidget' must be provided. Neither can be null.");
 }
 
 enum DescriptionPosition {

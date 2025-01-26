@@ -2,13 +2,15 @@ import 'package:feature_guider/guide_item.dart';
 import 'package:flutter/material.dart';
 
 class MaskingOption {
-  String overlayDesc;
+  // String overlayDesc;
+
+  Widget descriptionWidget;
 
   Rect drawRect;
 
   DescriptionPosition position;
 
-  TextStyle overlayStyle;
+  // TextStyle overlayStyle;
 
   EdgeInsets rectPadding;
 
@@ -17,10 +19,10 @@ class MaskingOption {
   double descInterval;
 
   MaskingOption(
-    this.overlayDesc,
+    this.descriptionWidget,
     this.drawRect,
     this.position,
-    this.overlayStyle,
+    // this.overlayStyle,
     this.rectPadding,
     this.borderRadius,
     this.descInterval,

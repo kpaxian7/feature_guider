@@ -79,84 +79,84 @@ class MaskingPainter extends CustomPainter {
     canvas.drawPath(path, paint);
   }
 
-  _drawDescription(Canvas canvas, Size size) {
-    if (controller.value != 0) {
-      return;
-    }
-    final paragraphStyle = ui.ParagraphStyle(
-      fontSize: show.overlayStyle.fontSize,
-      fontWeight: show.overlayStyle.fontWeight,
-      fontStyle: show.overlayStyle.fontStyle,
-      fontFamily: show.overlayStyle.fontFamily,
-      textHeightBehavior: const TextHeightBehavior(
-          applyHeightToFirstAscent: true, applyHeightToLastDescent: true),
-    );
-
-    ui.ParagraphBuilder builder = ui.ParagraphBuilder(paragraphStyle);
-    builder.pushStyle(
-        ui.TextStyle(letterSpacing: show.overlayStyle.letterSpacing));
-    builder.pushStyle(ui.TextStyle(color: show.overlayStyle.color));
-    builder.addText(show.overlayDesc);
-    ui.Paragraph p = builder.build();
-
-    /// 计算宽高
-    double descWidth = calculateTextWidth(show.overlayDesc, show.overlayStyle);
-    double descHeight =
-        calculateTextHeight(show.overlayDesc, show.overlayStyle);
-
-    p.layout(ui.ParagraphConstraints(width: descWidth));
-
-    double top = show.drawRect.top - show.rectPadding.top;
-    double left = show.drawRect.left - show.rectPadding.left;
-    double right = show.drawRect.right + show.rectPadding.right;
-    double bottom = show.drawRect.bottom + show.rectPadding.bottom;
-
-    double widgetCenterX = left + (right - left) / 2;
-    double widgetCenterY = top + (bottom - top) / 2;
-
-    double offsetX = 0;
-    double offsetY = 0;
-
-    // bool endOverflow = left + descWidth > size.width;
-
-    double interval = show.descInterval;
-
-    switch (show.position) {
-      case DescriptionPosition.auto:
-        offsetX = left;
-        if (widgetCenterY > size.height / 2) {
-          offsetY = top - descHeight - interval;
-          // offsetX = endOverflow ? right - descWidth : left;
-        } else {
-          offsetY = bottom + interval;
-        }
-        break;
-      case DescriptionPosition.screenCenter:
-        offsetX = (size.width - descWidth) / 2;
-        offsetY = (size.height - descHeight) / 2;
-        break;
-      case DescriptionPosition.alignTopLeft:
-        offsetX = left;
-        offsetY = top - descHeight - interval;
-        break;
-      case DescriptionPosition.alignTopRight:
-        offsetX = right - descWidth;
-        offsetY = top - descHeight - interval;
-        break;
-      case DescriptionPosition.alignBottomLeft:
-        offsetX = left;
-        offsetY = bottom + interval;
-        break;
-      case DescriptionPosition.alignBottomRight:
-        offsetX = right - descWidth;
-        offsetY = bottom + interval;
-        break;
-    }
-
-    Offset offset = Offset(offsetX, offsetY);
-
-    canvas.drawParagraph(p, offset);
-  }
+  // _drawDescription(Canvas canvas, Size size) {
+  //   if (controller.value != 0) {
+  //     return;
+  //   }
+  //   final paragraphStyle = ui.ParagraphStyle(
+  //     fontSize: show.overlayStyle.fontSize,
+  //     fontWeight: show.overlayStyle.fontWeight,
+  //     fontStyle: show.overlayStyle.fontStyle,
+  //     fontFamily: show.overlayStyle.fontFamily,
+  //     textHeightBehavior: const TextHeightBehavior(
+  //         applyHeightToFirstAscent: true, applyHeightToLastDescent: true),
+  //   );
+  //
+  //   ui.ParagraphBuilder builder = ui.ParagraphBuilder(paragraphStyle);
+  //   builder.pushStyle(
+  //       ui.TextStyle(letterSpacing: show.overlayStyle.letterSpacing));
+  //   builder.pushStyle(ui.TextStyle(color: show.overlayStyle.color));
+  //   builder.addText(show.overlayDesc);
+  //   ui.Paragraph p = builder.build();
+  //
+  //   /// 计算宽高
+  //   double descWidth = calculateTextWidth(show.overlayDesc, show.overlayStyle);
+  //   double descHeight =
+  //       calculateTextHeight(show.overlayDesc, show.overlayStyle);
+  //
+  //   p.layout(ui.ParagraphConstraints(width: descWidth));
+  //
+  //   double top = show.drawRect.top - show.rectPadding.top;
+  //   double left = show.drawRect.left - show.rectPadding.left;
+  //   double right = show.drawRect.right + show.rectPadding.right;
+  //   double bottom = show.drawRect.bottom + show.rectPadding.bottom;
+  //
+  //   double widgetCenterX = left + (right - left) / 2;
+  //   double widgetCenterY = top + (bottom - top) / 2;
+  //
+  //   double offsetX = 0;
+  //   double offsetY = 0;
+  //
+  //   // bool endOverflow = left + descWidth > size.width;
+  //
+  //   double interval = show.descInterval;
+  //
+  //   switch (show.position) {
+  //     case DescriptionPosition.auto:
+  //       offsetX = left;
+  //       if (widgetCenterY > size.height / 2) {
+  //         offsetY = top - descHeight - interval;
+  //         // offsetX = endOverflow ? right - descWidth : left;
+  //       } else {
+  //         offsetY = bottom + interval;
+  //       }
+  //       break;
+  //     case DescriptionPosition.screenCenter:
+  //       offsetX = (size.width - descWidth) / 2;
+  //       offsetY = (size.height - descHeight) / 2;
+  //       break;
+  //     case DescriptionPosition.alignTopLeft:
+  //       offsetX = left;
+  //       offsetY = top - descHeight - interval;
+  //       break;
+  //     case DescriptionPosition.alignTopRight:
+  //       offsetX = right - descWidth;
+  //       offsetY = top - descHeight - interval;
+  //       break;
+  //     case DescriptionPosition.alignBottomLeft:
+  //       offsetX = left;
+  //       offsetY = bottom + interval;
+  //       break;
+  //     case DescriptionPosition.alignBottomRight:
+  //       offsetX = right - descWidth;
+  //       offsetY = bottom + interval;
+  //       break;
+  //   }
+  //
+  //   Offset offset = Offset(offsetX, offsetY);
+  //
+  //   canvas.drawParagraph(p, offset);
+  // }
 
   @override
   bool shouldRepaint(MaskingPainter oldDelegate) {

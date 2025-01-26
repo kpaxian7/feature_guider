@@ -137,10 +137,7 @@ class _MaskingStackState extends State<MaskingStack> {
 
     Widget actualDescriptionWidget = Material(
       color: Colors.transparent,
-      child: Text(
-        show.overlayDesc,
-        style: show.overlayStyle,
-      ),
+      child: show.descriptionWidget,
     );
 
     if (showCenter) {
