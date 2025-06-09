@@ -19,3 +19,8 @@
 * Support custom widget for description.
 * Re-optimized the usage of the position parameter.
 * Fix bug.
+
+## 1.0.1
+
+* Supports one-time display of guide items using optional `id` with SharedPreferences.
+* Optimize.
