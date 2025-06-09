@@ -1,8 +1,8 @@
 import 'package:feature_guider/guide_item.dart';
-import 'package:feature_guider/render/masking_painter.dart';
 import 'package:feature_guider/render/masking_stack.dart';
 import 'package:feature_guider/render/model/masking_option.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class GuideManager {
   /// The BuildContext required to display the overlay
@@ -24,11 +24,19 @@ class GuideManager {
     this.duration = const Duration(milliseconds: 200),
   });
 
-  prepare(List<GuideItem> guiderWidgetList) {
+  prepare(List<GuideItem> guiderWidgetList) async {
     _overlayDescArray.clear();
     for (GuideItem item in guiderWidgetList) {
       assert(item.toGuideKey != null || item.toGuideRect != null,
           "Either 'toGuideKey' or 'toGuideRect' must be provided. Neither can be null.");
+
+      if (item.id != null) {
+        bool shouldShow = await _shouldShowGuide(item);
+        if (!shouldShow) {
+          continue;
+        }
+      }
+
       if (item.toGuideKey is GlobalKey) {
         _assembleLTRBFromKey(item);
       }
@@ -41,6 +49,17 @@ class GuideManager {
   show() {
     assert(_overlayDescArray.isNotEmpty, "Guider array must be not empty!");
     _showActual();
+  }
+
+  Future<void> _markGuideShown(String id) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('guide_shown_$id', true);
+  }
+
+  Future<bool> _shouldShowGuide(GuideItem item) async {
+    if (item.id == null) return true;
+    final prefs = await SharedPreferences.getInstance();
+    return !(prefs.getBool('guide_shown_${item.id}') ?? false);
   }
 
   _assembleLTRBFromKey(GuideItem item) {
@@ -63,10 +82,10 @@ class GuideManager {
       r = l + widgetWidth;
     }
     _overlayDescArray.add(MaskingOption(
+      item.id,
       item.descriptionWidget ?? Container(),
       Rect.fromLTRB(l, t, r, b),
       item.position,
-      // item.descriptionStyle,
       item.padding,
       item.borderRadius,
       item.descriptionInterval,
@@ -84,10 +103,10 @@ class GuideManager {
     r = item.toGuideRect!.right;
     b = item.toGuideRect!.bottom;
     _overlayDescArray.add(MaskingOption(
+      item.id,
       item.descriptionWidget ?? Container(),
       Rect.fromLTRB(l, t, r, b),
       item.position,
-      // item.descriptionStyle,
       item.padding,
       item.borderRadius,
       item.descriptionInterval,
@@ -104,6 +123,11 @@ class GuideManager {
       );
     });
     Overlay.of(context).insert(_guideMaskingOverlay!);
+    for (MaskingOption overlayItem in _overlayDescArray) {
+      if (overlayItem.id != null) {
+        _markGuideShown(overlayItem.id!);
+      }
+    }
   }
 
   _dismiss() {
@@ -178,9 +202,6 @@ class _GuiderOverlayContainerState extends State<GuiderOverlayContainer>
 
   @override
   Widget build(BuildContext context) {
-    // print("show ==  ${start?.overlayDesc}");
-    // print("next ==  ${next?.overlayDesc}");
-
     return start == null && next == null
         ? Container()
         : GestureDetector(
@@ -195,22 +216,4 @@ class _GuiderOverlayContainerState extends State<GuiderOverlayContainer>
             ),
           );
   }
-// @override
-// Widget build(BuildContext context) {
-//   return start == null && next == null
-//       ? Container()
-//       : GestureDetector(
-//           onTap: () {
-//             _guideContinue();
-//           },
-//           child: CustomPaint(
-//             size: Size(
-//               MediaQuery.of(context).size.width,
-//               MediaQuery.of(context).size.height,
-//             ),
-//             painter: MaskingPainter(start!, animController!,
-//                 next: next, opacity: widget.opacity),
-//           ),
-//         );
-// }
 }

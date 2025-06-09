@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
 class GuideItem {
+  /// Unique identifier for this guide item, used to track if it's already shown
+  /// If null, this item will always be shown and will not be stored or checked in SharedPreferences
+  String? id;
 
   /// Description widget for single feature item
   Widget? descriptionWidget;
@@ -30,6 +33,7 @@ class GuideItem {
   double descriptionInterval;
 
   GuideItem({
+    this.id,
     this.descriptionWidget,
     this.toGuideKey,
     this.toGuideRect,
@@ -37,9 +41,7 @@ class GuideItem {
     this.padding = EdgeInsets.zero,
     this.borderRadius = const BorderRadius.all(Radius.circular(4)),
     this.descriptionInterval = 4,
-  }) ;
-  // : assert(descriptionText != null || descriptionWidget != null,
-  //           "Either 'descriptionText' or 'descriptionWidget' must be provided. Neither can be null.");
+  });
 }
 
 enum DescriptionPosition {

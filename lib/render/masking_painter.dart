@@ -1,8 +1,4 @@
-import 'dart:ui' as ui;
-
-import 'package:feature_guider/guide_item.dart';
 import 'package:feature_guider/render/model/masking_option.dart';
-import 'package:feature_guider/utils.dart';
 import 'package:flutter/material.dart';
 
 class MaskingPainter extends CustomPainter {

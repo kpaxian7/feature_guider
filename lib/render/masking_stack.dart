@@ -93,10 +93,6 @@ class _MaskingStackState extends State<MaskingStack> {
     double left = show.drawRect.left - show.rectPadding.left;
     double right = show.drawRect.right + show.rectPadding.right;
     double bottom = show.drawRect.bottom + show.rectPadding.bottom;
-    print("\ntop = $top" +
-        "\nleft = $left" +
-        "\nright = $right" +
-        "\nbottom = $bottom");
 
     double? descriptionLeft;
     double? descriptionTop;
@@ -144,11 +140,6 @@ class _MaskingStackState extends State<MaskingStack> {
         descriptionTop = bottom + show.descInterval;
         break;
     }
-    print("show.position = ${show.position}, "
-        " \n descriptionLeft = $descriptionLeft"
-        " \n descriptionTop = $descriptionTop"
-        " \n descriptionRight = $descriptionRight"
-        " \n descriptionBottom = $descriptionBottom");
 
     Widget actualDescriptionWidget = Material(
       color: Colors.transparent,

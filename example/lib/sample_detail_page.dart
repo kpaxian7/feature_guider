@@ -23,47 +23,54 @@ class _SampleDetailPageState extends State<SampleDetailPage> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      guideManager ??= GuideManager(context,
-          opacity: 0.7, duration: const Duration(milliseconds: 200));
-      guideManager!.prepare([
-        GuideItem(
-          descriptionWidget: const Text(
-            "Click here to go back",
-            style: TextStyle(color: Colors.white),
-          ),
-          toGuideKey: keyAppBarBack,
-          position: DescriptionPosition.auto,
-        ),
-        GuideItem(
-          descriptionWidget: const Text(
-            "This is the title of this page",
-            style: TextStyle(color: Colors.white),
-          ),
-          toGuideKey: keyAppBarTitle,
-          padding: const EdgeInsets.only(left: 20, right: 20),
-          position: DescriptionPosition.auto,
-        ),
-        GuideItem(
-            descriptionWidget: ElevatedButton(
-              onPressed: () {},
-              child: const Text("Display area. Tap here\nto see more details.",textAlign: TextAlign.start,),
-            ),
-            toGuideKey: keyCountDisplay,
-            padding: EdgeInsets.zero,
-            position: DescriptionPosition.auto),
-        GuideItem(
-          descriptionWidget: const Text(
-            "Click here to increase the 'count'",
-            style: TextStyle(color: Colors.white),
-          ),
-          toGuideKey: keyCountIncrease,
-          padding: const EdgeInsets.all(5),
-          borderRadius: const BorderRadius.all(Radius.circular(50)),
-          position: DescriptionPosition.auto,
-        ),
-      ]);
-      guideManager!.show();
+      _performGuide();
     });
+  }
+
+  _performGuide() async {
+    guideManager ??= GuideManager(context,
+        opacity: 0.7, duration: const Duration(milliseconds: 200));
+    await guideManager!.prepare([
+      GuideItem(
+        descriptionWidget: const Text(
+          "Click here to go back",
+          style: TextStyle(color: Colors.white),
+        ),
+        toGuideKey: keyAppBarBack,
+        position: DescriptionPosition.auto,
+      ),
+      GuideItem(
+        descriptionWidget: const Text(
+          "This is the title of this page",
+          style: TextStyle(color: Colors.white),
+        ),
+        toGuideKey: keyAppBarTitle,
+        padding: const EdgeInsets.only(left: 20, right: 20),
+        position: DescriptionPosition.auto,
+      ),
+      GuideItem(
+          descriptionWidget: ElevatedButton(
+            onPressed: () {},
+            child: const Text(
+              "Display area. Tap here\nto see more details.",
+              textAlign: TextAlign.start,
+            ),
+          ),
+          toGuideKey: keyCountDisplay,
+          padding: EdgeInsets.zero,
+          position: DescriptionPosition.auto),
+      GuideItem(
+        descriptionWidget: const Text(
+          "Click here to increase the 'count'",
+          style: TextStyle(color: Colors.white),
+        ),
+        toGuideKey: keyCountIncrease,
+        padding: const EdgeInsets.all(5),
+        borderRadius: const BorderRadius.all(Radius.circular(50)),
+        position: DescriptionPosition.auto,
+      ),
+    ]);
+    guideManager!.show();
   }
 
   @override
