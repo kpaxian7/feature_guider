@@ -8,6 +8,7 @@
 
 
 ## Feature Introduction
+- Supports one-time display of guide items using optional `id` with SharedPreferences
 - Supports custom description widget for GUIDANCE AREA
 - Supports locking the tip position with `Widget#key` or `Rect`
 - Supports setting the background mask opacity
@@ -21,7 +22,7 @@
 ```dart
 WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
   guideManager ??= GuideManager(context, opacity: 0.7);
-  guideManager!.prepare([
+  await guideManager!.prepare([
     GuideItem(
       description: "Click here to go back",
       toGuideKey: keyAppBarBack,
@@ -44,6 +45,7 @@ WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
 ## GuideItem
 | Parameter         | 	Description                                                                                                                                            |
 |-------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------|
+| id                | 	Unique identifier for this guide item, used to track if it's already shown                                                                                                                              |
 | descriptionWidget | 	Custom description widget                                                                                                                              |
 | toGuideKey        | 	Pass a GlobalKey for guidance area location                                                                                                            |
 | toGuideRect       | 	Pass a Rect for guidance area location                                                                                                                 |

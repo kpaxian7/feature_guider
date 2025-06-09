@@ -8,6 +8,7 @@
 
 
 ## 功能介绍
+- 支持通过可选的 `id` 和 SharedPreferences 实现引导项只展示一次
 - 支持自定义提示说明小组件
 - 支持`Widget#key` 或 `Rect`锁定提示位置
 - 支持背景蒙版透明度设置
@@ -22,7 +23,7 @@
 ```dart
 WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
   guideManager ??= GuideManager(context, opacity: 0.7);
-  guideManager!.prepare([
+  await guideManager!.prepare([
     GuideItem(
       description: "Click here to go back",
       toGuideKey: keyAppBarBack,
@@ -44,15 +45,16 @@ WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
 
 ## GuideItem
 
-| 参数                | 描述                                                                                                     |
-|-------------------|--------------------------------------------------------------------------------------------------------|
-| descriptionWidget | 提示描述组件                                                                                                 |
-| toGuideKey        | 传入一个GlobalKey，用于定位提示区                                                                                  |
-| toGuideRect       | 传入一个Rect，用于定位提示区                                                                                       |
+| 参数                | 描述                                                                                                         |
+|-------------------|------------------------------------------------------------------------------------------------------------|
+| id                | 提示仅展示一次的标识，展示后会计入SharedPreferences，下次不再展示                                                                  |
+| descriptionWidget | 提示描述组件                                                                                                     |
+| toGuideKey        | 传入一个GlobalKey，用于定位提示区                                                                                      |
+| toGuideRect       | 传入一个Rect，用于定位提示区                                                                                           |
 | position          | 文本展示在提示区的方位枚举，预设 `screenCenter`、`alignTopLeft`、`alignTopRight`、`alignBottomLeft`、`alignBottomRight`、`auto` |
-| padding           | 提示区域内边距                                                                                                |
-| borderRadius      | 提示区域圆角                                                                                                 |
-| textInterval      | 提示文案与提示区域的间距                                                                                           |
+| padding           | 提示区域内边距                                                                                                    |
+| borderRadius      | 提示区域圆角                                                                                                     |
+| textInterval      | 提示文案与提示区域的间距                                                                                               |
 
 ## DescriptionPosition
 - `screenCenter` - 屏幕中心
