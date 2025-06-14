@@ -47,7 +47,7 @@ class GuideManager {
   }
 
   show() {
-    assert(_overlayDescArray.isNotEmpty, "Guider array must be not empty!");
+    if (_overlayDescArray.isEmpty) return;
     _showActual();
   }
 
