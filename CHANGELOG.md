@@ -24,3 +24,7 @@
 
 * Supports one-time display of guide items using optional `id` with SharedPreferences.
 * Optimize.
+
+## 1.0.2
+
+* Fix Bug.
